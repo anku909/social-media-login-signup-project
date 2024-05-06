@@ -9,6 +9,10 @@ function Profile() {
   const { id } = params;
   const [fetchedUser, setFetchedUser] = useState("");
 
+  console.log(`https://server-self-tau.vercel.app/api/profile/${id}`);
+
+  console.log(fetchedUser);
+
   useEffect(() => {
     if (id) {
       const fetchUserData = async () => {

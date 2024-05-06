@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
-import { config } from "dotenv";
 
 import {
   createUserWithEmailAndPassword,

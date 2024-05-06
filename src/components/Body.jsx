@@ -99,7 +99,7 @@ function Body() {
     }
   };
 
-  const profileQrCodeUrl = `https://server-self-tau.vercel.app/profile/${fetchedUser._id}`;
+  const profileQrCodeUrl = `https://social-media-login-signup-project.vercel.app/profile/${fetchedUser?._id}`;
 
   return (
     <>
