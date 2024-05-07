@@ -91,16 +91,16 @@ function SignUp() {
 
   return (
     <>
-      <div className="signUp w-full h-screen lg:px-[25vw] bg-slate-200 ">
-        <div className="singUp-inner-section w-full h-screen flex items-center justify-center">
-          <div className="SignUp-function-section h-5/6   flex flex-col xl:w-[30vw] xl:px-12 ">
+      <div className="signUp w-full min-h-screen px-4 xl:px-[25vw] bg-slate-200 ">
+        <div className="singUp-inner-section w-full min-h-screen flex items-center justify-center">
+          <div className="SignUp-function-section h-full flex flex-col xl:w-[30vw] xl:h-5/6 xl:px-12 ">
             <div className="signUp-box w-full h-full border-[1px] border-[#a8a8a8]">
               <div className="heading w-full pt-2 mb-4 xl:pt-4 xl:mb-8">
-                <h1 className="heading-text  text-center font-semibold font-mono text-2xl xl:text-4xl">
+                <h1 className="heading-text  text-center font-semibold font-mono text-2xl sm:text-3xl xl:text-4xl">
                   Social Media
                 </h1>
               </div>
-              <div className="signUp-details-section w-full px-4 flex flex-col items-center gap-4 relative  xl:px-20">
+              <div className="signUp-details-section w-full px-4 flex flex-col items-center gap-4 relative  xl:px-8">
                 <form
                   onSubmit={handleSubmit}
                   className="w-full h-full flex flex-col items-center justify-center gap-2"
