@@ -30,13 +30,13 @@ function Login() {
 
   return (
     <>
-      <div className="login w-full h-screen px-[25vw] bg-slate-200 ">
-        <div className="login-inner-section w-full h-screen  pt-20 flex ">
-          <div className="logo-or-details-section w-[25vw] h-5/6"></div>
-          <div className="login-function-section w-[35vw] h-5/6  px-12 pt-20">
-            <div className="login-box w-full h-[64%] border-[1px] border-[#a8a8a8]">
-              <div className="heading w-full py-8">
-                <h1 className="heading-text text-4xl text-center font-semibold font-mono">
+      <div className="login w-full h-screen flex items-center justify-center  bg-slate-200 sm:px-[10vw]  md:px-[10vw] lg:px-[10vw] xl:px-[20vw] 2xl:px-[25vw]">
+        <div className="login-inner-section w-full h-screen flex items-center justify-center sm:justify-end md:justify-end lg:justify-end xl:justify-end bg-blue-100  lg:pt-20 lg:flex  ">
+          <div className="logo-or-details-section lg:w-[25vw] lg:h-5/6"></div>
+          <div className="login-function-section w-[350px] sm:w-[400px] md:w-[400px] lg:w-[420px]   ">
+            <div className="login-box w-full  border-[1px] border-[#a8a8a8]">
+              <div className="heading w-full py-4 lg:py-8">
+                <h1 className="heading-text  text-2xl sm:text-4xl  text-center font-semibold font-mono">
                   Social Media
                 </h1>
               </div>
@@ -46,7 +46,7 @@ function Login() {
                     handleSignIn();
                   }
                 }}
-                className="login-details-section w-full h-[32vh]mt-2 px-20 flex flex-col gap-3"
+                className="login-details-section w-full h-[40vh]  px-4 flex flex-col gap-3 sm:px-8 md:px-10 lg:px-12 sm:h-[40vh] md:h-[40vh] lg:h-[40vh] xl:h-[40vh] 2xl:h-[32vh] "
               >
                 <input
                   onChange={(e) => setEmail(e.target.value)}
@@ -85,7 +85,7 @@ function Login() {
                   Login
                 </button>
                 <p
-                  className={`w-full h-6 text-red-500 text-center text-[12px] ${
+                  className={`w-full h-6 text-red-500 text-center text-sm lg:text-[12px] ${
                     error ? "visible" : "hidden"
                   }`}
                 >

@@ -112,7 +112,7 @@ function Body() {
           userEmail={userEmail}
         />
       ) : (
-        <div className="w-full h-screen bg-slate-50 px-[20vw]">
+        <div className="w-full h-screen bg-slate-50 lg:px-[20vw]">
           <div className="showUserProfile w-full h-full bg-slate-200  pt-32 px-20 flex  items-start justify-center">
             <div className="cardWrapper w-[50%]  flex flex-col items-center justify-start border-[1px] border-[#bbbbbb] hover:border-[#989898]  px-4 py-4 ">
               {showQrCode ? (
