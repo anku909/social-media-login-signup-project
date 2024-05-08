@@ -113,7 +113,7 @@ function Body() {
         />
       ) : (
         <div className="w-full min-h-screen bg-slate-50 px-6 sm:px-24 lg:px-[20vw]">
-          <div className="showUserProfile w-full min-h-screen bg-slate-200 pt-20 px-2 flex items-center justify-center lg:pt-32 lg:px-20">
+          <div className="showUserProfile w-full min-h-screen pb-20 bg-slate-200 pt-20 px-2 flex items-center justify-center lg:pt-32 lg:px-20">
             <div className="cardWrapper w-[280px] h-[62vh] py-4 px-2 flex flex-col items-center justify-start border-[1px] border-[#bbbbbb] hover:border-[#989898]  sm:w-[400px] sm:h-[74vh] sm:px-4 lg:px-4 lg:w-[550px] lg:h-[80vh]">
               {showQrCode ? (
                 <>
@@ -229,7 +229,7 @@ function Body() {
                       " "
                     )}
                   </div>
-                  <div className="profileCarddetails w-full border-[1px] pt-8 mt-3 bg-pink-200 border-[#b5b2b2] rounded-md flex flex-col items-center justify-center gap-2 sm:h-full lg:px-5 lg:py-10 lg:mt-4">
+                  <div className="profileCarddetails w-full border-[1px] pt-8 mt-3 border-[#b5b2b2] rounded-md flex flex-col items-center justify-center gap-2 sm:h-full lg:px-5 lg:py-10 lg:mt-4">
                     <h1 className="text-xs sm:text-xl lg:text-2xl font-mono font-bold">
                       {fullName}
                     </h1>
