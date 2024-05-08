@@ -239,7 +239,7 @@ function SignUp() {
                 <div className="signUp-with-other flex justify-center items-center">
                   <button
                     onClick={() => firebase.signUpWithGoogle()}
-                    className="font-semibold text-blue-500 font-sans"
+                    className="font-semibold text-blue-500 font-sans mb-4"
                   >
                     Sign up with Gmail
                   </button>

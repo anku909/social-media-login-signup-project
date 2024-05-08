@@ -112,9 +112,9 @@ function Body() {
           userEmail={userEmail}
         />
       ) : (
-        <div className="w-full h-screen bg-slate-50 lg:px-[20vw]">
-          <div className="showUserProfile w-full h-full bg-slate-200  pt-32 px-20 flex  items-start justify-center">
-            <div className="cardWrapper w-[50%]  flex flex-col items-center justify-start border-[1px] border-[#bbbbbb] hover:border-[#989898]  px-4 py-4 ">
+        <div className="w-full min-h-screen bg-slate-50 px-6 sm:px-24 lg:px-[20vw]">
+          <div className="showUserProfile w-full min-h-screen bg-slate-200 pt-20 px-2 flex items-center justify-center lg:pt-32 lg:px-20">
+            <div className="cardWrapper w-[280px] h-[62vh] py-4 px-2 flex flex-col items-center justify-start border-[1px] border-[#bbbbbb] hover:border-[#989898]  sm:w-[400px] sm:h-[74vh] sm:px-4 lg:px-4 lg:w-[550px] lg:h-[80vh]">
               {showQrCode ? (
                 <>
                   <QRCodeSVG
@@ -134,8 +134,8 @@ function Body() {
                 </>
               ) : (
                 <>
-                  <div className="profileCardImg w-full relative rounded-md">
-                    <div className="coverimgContainer w-full h-56 relative rounded-lg overflow-hidden">
+                  <div className="profileCardImg w-full relative rounded-md ">
+                    <div className="coverimgContainer  w-full h-32 relative rounded-lg overflow-hidden sm:h-40 lg:h-56">
                       <img
                         className="w-full h-full object-cover opacity-95"
                         src={coverImgUrl}
@@ -143,11 +143,11 @@ function Body() {
                     </div>
                     <div
                       onClick={handleShowSetting}
-                      className="settting-icon w-16 h-16 absolute -top-9 -right-8 rounded-full overflow-hidden flex items-center justify-center cursor-pointer z-50"
+                      className="settting-icon w-10 h-10 -top-6 -right-5 rounded-full overflow-hidden flex items-center justify-center cursor-pointer z-50 absolute sm:w-14 sm:h-14 sm:-top-7 sm:-right-7 lg:w-16 lg:h-16 lg:-top-9 lg:-right-8 "
                     >
                       <img src={settingImg} alt="" />
                     </div>
-                    <div className="profileImg w-28 h-28 rounded-full overflow-hidden absolute -bottom-10 left-1/2 -translate-x-1/2 drop-shadow-2xl">
+                    <div className="profileImg w-16 h-16 lg:w-28 lg:h-28 rounded-full overflow-hidden absolute -bottom-10 left-1/2 -translate-x-1/2 drop-shadow-2xl">
                       <img
                         className="w-full h-full object-cover"
                         src={profileImgUrl}
@@ -229,46 +229,48 @@ function Body() {
                       " "
                     )}
                   </div>
-                  <div className="profileCarddetails w-full border-[1px] border-[#b5b2b2] rounded-md px-5 py-10 mt-4 flex flex-col items-center justify-center gap-2">
-                    <h1 className=" text-2xl font-mono font-bold">
+                  <div className="profileCarddetails w-full border-[1px] pt-8 mt-3 bg-pink-200 border-[#b5b2b2] rounded-md flex flex-col items-center justify-center gap-2 sm:h-full lg:px-5 lg:py-10 lg:mt-4">
+                    <h1 className="text-xs sm:text-xl lg:text-2xl font-mono font-bold">
                       {fullName}
                     </h1>
-                    <span className=" text-md font-mono">
+                    <span className="text-xs sm:text-base lg:text-lg font-mono">
                       @{fetchedUser?.userName ? fetchedUser?.userName : "--"}
                     </span>
-                    <h1 className="  text-md font-mono ">
+                    <h1 className="text-xs sm:text-base lg:text-lg  font-mono ">
                       {fetchedUser?.email}
                     </h1>
-                    <div className="other-details flex gap-6">
-                      <span className="text-md font-thin">
+                    <div className="other-details flex gap-8 lg:gap-6">
+                      <span className="text-xs sm:text-sm lg:text-base  font-thin">
                         {fetchedUser.location ? fetchedUser.location : "--"}
                       </span>
-                      <span>
+                      <span className="text-xs sm:text-sm lg:text-base font-thin">
                         {fetchedUser.gender ? fetchedUser.gender : "--"}
                       </span>
-                      <span>--</span>
+                      <span className="text-xs sm:text-sm lg:text-base font-thin">
+                        --
+                      </span>
                     </div>
-                    <div className="bio-section w-80 h-20 ">
+                    <div className="bio-section w-52 h-16  lg:w-80 lg:h-24">
                       <p className="text-center opacity-80 text-sm font-medium">
                         {fetchedUser?.bio}
                       </p>
                     </div>
                     <i
                       onClick={handleShowQrCode}
-                      className="ri-qr-scan-2-line text-5xl cursor-pointer"
+                      className="ri-qr-scan-2-line text-2xl mb-1 cursor-pointer sm:text-3xl lg:text-5xl"
                     ></i>
                   </div>
 
-                  <div className="function-btns w-full flex items-center justify-between px-4 mt-5">
+                  <div className="function-btns w-full px-2 py-2 flex items-center justify-between lg:px-4 lg:mt-5">
                     <button
                       onClick={handleEditProfile}
-                      className="w-32 h-8 py-1 rounded-full border-[#a4a3a3] border-[1px]"
+                      className="w-20 h-6 rounded-full font-semibold border-[#a4a3a3] border-[1px] text-xs sm:w-28 sm:h-8 lg:w-32 lg:h-8 lg:py-1"
                     >
                       Edit profile
                     </button>
                     <button
                       onClick={() => firebase.handleSignOut()}
-                      className="w-32 h-8 py-1 bg-blue-500 rounded-full hover:bg-red-600 text-white font-semibold"
+                      className="w-20 h-6 bg-blue-500 rounded-full hover:bg-red-600 text-xs text-white font-semibold sm:w-28 sm:h-8 lg:w-32 lg:h-8 lg:py-1"
                     >
                       Logout
                     </button>
