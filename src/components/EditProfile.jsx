@@ -95,13 +95,13 @@ function EditProfile({
   return (
     <>
       <div className="edit-profile w-full h-full flex bg-slate-300 items-center justify-center absolute">
-        <div className="edit-profile-box w-[25%] bg-slate-200 border-[1px] border-[#a8a8a8] ">
-          <div className="heading w-full pt-4 mb-2 ">
-            <h1 className="heading-text text-xl text-center font-semibold font-mono">
+        <div className="edit-profile-box w-[95vw] h-[650px] bg-slate-200 border-[1px] border-[#a8a8a8] sm:w-[60%] lg:w-[25%]">
+          <div className="heading w-full pt-4 mb-3 ">
+            <h1 className="heading-text text-2xl text-center font-semibold font-mono lg:text-3xl">
               Edit Profile
             </h1>
           </div>
-          <div className="edit-profile-details-section w-full h-[32vh]mt-2 px-20 flex flex-col items-center gap-4 relative ">
+          <div className="edit-profile-details-section w-full lg:h-[32vh]mt-2 px-10 flex flex-col items-center gap-4 relative lg:px-16 ">
             <form
               onSubmit={handleSubmit}
               className="w-full h-full flex flex-col items-center justify-center gap-2"
@@ -232,13 +232,13 @@ function EditProfile({
               <div className="btns-section w-full flex justify-between items-center px-2">
                 <button
                   type="submit"
-                  className="w-32 h-10  bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-md mt-4 mb-1"
+                  className="w-20 h-8  bg-blue-500 hover:bg-blue-700 text-white font-bold text-sm rounded-md mt-4 mb-1 sm:w-28 sm:h-10 sm:text-lg lg:w-32 lg:h-10 lg:text-lg"
                 >
                   save
                 </button>
                 <button
                   onClick={() => setEditProfile(false)}
-                  className="w-32 h-10 border-[1px] border-[#c7c4c4] font-semibold text-lg rounded-md mt-4 mb-1"
+                  className="w-20 h-8 border-[1px] border-[#c7c4c4] font-semibold text-sm rounded-md mt-4 mb-1 sm:w-28 sm:h-10 lg:w-32 lg:h-10 sm:text-lg lg:text-lg"
                 >
                   cancel
                 </button>

@@ -6,9 +6,9 @@ import Footer from "./Footer";
 function Home() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Body />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

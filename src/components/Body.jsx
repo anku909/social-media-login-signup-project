@@ -121,15 +121,15 @@ function Body() {
                     className="w-[80%] h-[80%] "
                     value={profileQrCodeUrl}
                   />
-                  <h1 className="text-2xl font-semibold font-mono ">
+                  <h1 className="text-base font-semibold font-mono sm:text-2xl lg:text-2xl">
                     {" "}
                     Scan to see User profile
                   </h1>
                   <div
                     onClick={handleShowQrCode}
-                    className="rounded-back-button w-12 h-12 border-[#bfbdbd] border-[1px] flex items-center justify-center rounded-full mt-2"
+                    className="rounded-back-button w-8 h-8 border-[#bfbdbd] border-[1px] flex items-center justify-center rounded-full mt-4 sm:w-10 sm:h-10 lg:w-12 lg:h-12 "
                   >
-                    <i className="ri-arrow-left-line text-2xl cursor-pointer"></i>
+                    <i className="ri-arrow-left-line text-xl cursor-pointer sm:text-2xl lg:text-3xl"></i>
                   </div>
                 </>
               ) : (
