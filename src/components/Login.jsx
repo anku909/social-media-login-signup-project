@@ -54,7 +54,7 @@ function Login() {
                   type="email"
                   name="email"
                   id="email"
-                  placeholder="email"
+                  placeholder="Email"
                 />
                 <div className="password-input w-full h-10 border-[1px]  border-[#b4b2b2] bg-zinc-100 rounded-md pl-3 flex items-center">
                   <input
@@ -63,7 +63,7 @@ function Login() {
                     type={showPassword ? "text" : "password"}
                     name="password"
                     id="password"
-                    placeholder="password"
+                    placeholder="Password"
                   />
                   <div
                     className="hide-show-icon cursor-pointer"

@@ -201,7 +201,7 @@ function SignUp() {
                       type={showPassword ? "text" : "password"}
                       name="password"
                       id="password"
-                      placeholder="password"
+                      placeholder="Password"
                     />
                     <div
                       className="hide-show-icon cursor-pointer"
