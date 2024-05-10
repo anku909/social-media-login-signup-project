@@ -50,7 +50,6 @@ export const FirebaseProvider = (props) => {
       await signOut(auth);
       setUser(null);
       setToken(null);
-      localStorage.clear();
     } catch (error) {
       console.error("Error signing out:", error);
     }

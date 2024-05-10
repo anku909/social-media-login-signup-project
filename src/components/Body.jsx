@@ -154,14 +154,14 @@ function Body() {
                       />
                     </div>
                     {showSetting ? (
-                      <div className="setting w-full h-80 rounded-lg bg-zinc-200 border-[1px] border-[#969595] absolute top-0 z-2 py-4 px-5">
-                        <h2 className="text-center h-10 text-2xl  text-bold bg-slate-100 rounded-lg ">
+                      <div className="setting w-full h-[38vh] rounded-lg bg-zinc-200 border-[1px] border-[#969595] flex flex-col items-center justify-center absolute top-0 z-2 py-4 px-5 sm:h-80 md:h-80 lg:h-[40vh]">
+                        <h2 className="text-center w-full text-md  font-semibold bg-slate-100 rounded-lg mt-4 sm:text-2xl lg:h-12">
                           Setting Panel
                         </h2>
-                        <div className="setting-options-section w-full  mt-4 pt-4 flex flex-col gap-4">
-                          <div className="update-password w-full h-12">
+                        <div className="setting-options-section w-full h-full mt-4 pt-4 flex flex-col gap-4">
+                          <div className="update-password w-full h-8 sm:mb-2 lg:mb-4">
                             {showSetPass ? (
-                              <div className="password-input w-full h-10 border-[1px]  border-[#b4b2b2] bg-zinc-100 rounded-md pl-3 flex items-center">
+                              <div className="password-input w-full h-8 border-[1px]  border-[#b4b2b2] bg-zinc-100 rounded-md pl-3 flex items-center sm:h-10 lg:h-12">
                                 <input
                                   onChange={(e) => setPassword(e.target.value)}
                                   className="w-[90%] h-full  bg-zinc-100 outline-none border-none placeholder:text-sm"
@@ -172,7 +172,7 @@ function Body() {
                                 />
                               </div>
                             ) : (
-                              <p className="text-center text-md font-semibold">
+                              <p className="text-center text-md font-semibold lg:text-xl">
                                 Reset your password
                               </p>
                             )}
@@ -180,7 +180,7 @@ function Body() {
                           {showSetPass ? (
                             <button
                               onClick={() => handleUpdatePass(password)}
-                              className="w-full h-10 bg-blue-500 rounded-[4px] text-white text-md font-semibold"
+                              className="w-full h-6 bg-blue-500 rounded-[4px] text-white text-sm font-semibold sm:h-8 lg:h-12 lg:text-base"
                             >
                               Update Password
                             </button>
@@ -188,7 +188,7 @@ function Body() {
                             <div>
                               <button
                                 onClick={handleShowSetPass}
-                                className="w-full h-10 bg-blue-500 rounded-[4px] text-white text-md font-semibold"
+                                className="w-full h-6 bg-blue-500 rounded-[4px] text-white text-sm font-semibold sm:h-8 sm:text-md lg:h-12 lg:text-base"
                               >
                                 Reset Password
                               </button>
@@ -201,7 +201,7 @@ function Body() {
                           )}
                           <button
                             onClick={handleShowDeleteUerOption}
-                            className="w-full h-10   rounded-[4px] text-white text-md font-semibold bg-slate-400 hover:bg-red-500 transition-colors ease-in"
+                            className="w-full h-6 rounded-[4px] text-white text-sm font-semibold bg-slate-400 hover:bg-red-500 transition-colors ease-in sm:h-8 sm:text-md lg:h-12 lg:text-base"
                           >
                             Delete User
                           </button>
@@ -209,13 +209,13 @@ function Body() {
                             <div className="confirm-btns-section px-2 flex justify-between mb-2">
                               <button
                                 onClick={() => handleDeleteUer(true)}
-                                className="w-32 h-10 bg-red-500 rounded-full text-white text-md font-semibold"
+                                className="w-30 h-6 px-2 bg-red-500 rounded-full text-white text-xs font-semibold sm:w-32 sm:h-8 sm:text-sm lg:w-32 lg:h-10 lg:text-base"
                               >
                                 Confirm
                               </button>
                               <button
                                 onClick={() => handleDeleteUer(false)}
-                                className="w-32 h-10 border-[#b6b3b3] border-[1px] rounded-full text-white text-md font-semibold"
+                                className="w-30 h-6 px-2 border-[#b6b3b3] border-[1px] rounded-full text-white text-xs font-semibold sm:w-32 sm:h-8 sm:text-sm lg:w-32 lg:h-10 lg:text-base"
                               >
                                 Cancel
                               </button>

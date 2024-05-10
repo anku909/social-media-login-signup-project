@@ -129,6 +129,7 @@ function EditProfile({
                 name="coverImg"
                 id="coverImg"
                 ref={coverInput}
+                accept="image/*"
                 onChange={handleCoverImageChange}
                 className="hidden "
               />
@@ -155,6 +156,7 @@ function EditProfile({
                 name="profileImg"
                 id="profileImg"
                 ref={profileInput}
+                accept="image/*"
                 onChange={handleImageChange}
                 className="hidden"
                 autoComplete="off"

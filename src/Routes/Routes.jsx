@@ -5,31 +5,27 @@ import SignUp from "../components/SignUp";
 import Home from "../components/Home";
 import { useFirebase } from "../context/firebase";
 import Profile from "../components/Profile";
+import { useCookies } from "react-cookie";
 
 function AppRoutes() {
   const firebase = useFirebase();
+  const [cookies, setCookie] = useCookies(["myCookie"]);
 
   const { token } = firebase;
 
   const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   useEffect(() => {
-    // state to handle successful login
     const fetchTokenFromLocalStorage = async () => {
-      let storedToken = localStorage.getItem("firebaseToken");
-      console.log(storedToken);
-      if (storedToken) {
+      if (cookies) {
         setIsLoggedIn(true);
       } else {
         try {
-          // Token not found in local storage, fetch it from the server
-          storedToken = await token; // Replace this with the actual function to fetch the token from the server
-          if (storedToken) {
-            // Token fetched successfully, set it in local storage
-            localStorage.setItem("firebaseToken", storedToken);
+          let localToken = await token;
+          if (localToken) {
             setIsLoggedIn(true);
+            setCookie("myCookie", localToken, { path: "/" });
           } else {
-            // Token not available from server
             setIsLoggedIn(false);
           }
         } catch (error) {
@@ -39,7 +35,7 @@ function AppRoutes() {
       }
     };
     fetchTokenFromLocalStorage();
-  }, [token]);
+  }, [cookies, setCookie, token]);
 
   return (
     <div>

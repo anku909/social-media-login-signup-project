@@ -124,6 +124,7 @@ function SignUp() {
                     name="coverImg"
                     id="coverImg"
                     ref={coverInput}
+                    accept="image/*"
                     onChange={handleCoverImageChange}
                     className="hidden "
                   />
@@ -150,6 +151,7 @@ function SignUp() {
                     name="profileImg"
                     id="profileImg"
                     ref={profileInput}
+                    accept="image/*"
                     onChange={handleImageChange}
                     className="hidden"
                     autoComplete="off"
