@@ -10,6 +10,7 @@ import {
   signInWithEmailAndPassword,
   updatePassword,
 } from "firebase/auth";
+import { useCookies } from "react-cookie";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -29,6 +30,7 @@ export const useFirebase = () => useContext(FirebaseContext);
 export const FirebaseProvider = (props) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [cookie, removeCookie] = useCookies(["myCookie"]);
 
   useEffect(() => {
     const auth = getAuth();
@@ -50,6 +52,7 @@ export const FirebaseProvider = (props) => {
       await signOut(auth);
       setUser(null);
       setToken(null);
+      removeCookie("myCookie"); // Remove the cookie with the correct path
     } catch (error) {
       console.error("Error signing out:", error);
     }

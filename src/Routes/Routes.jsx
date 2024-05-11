@@ -9,33 +9,46 @@ import { useCookies } from "react-cookie";
 
 function AppRoutes() {
   const firebase = useFirebase();
-  const [cookies, setCookie] = useCookies(["myCookie"]);
-
-  const { token } = firebase;
-
   const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const { user, token } = firebase;
+  const [cookies, setCookie, removeCookie] = useCookies(["myCookie"]);
+
+  console.log(isLoggedIn);
+  console.log(cookies);
+  console.log(token);
+
+  useEffect(() => {
+    if (cookies && cookies.myCookie) {
+      setIsLoggedIn(true);
+    }
+  }, [cookies]);
 
   useEffect(() => {
     const fetchTokenFromLocalStorage = async () => {
-      if (cookies) {
-        setIsLoggedIn(true);
-      } else {
-        try {
-          let localToken = await token;
-          if (localToken) {
-            setIsLoggedIn(true);
-            setCookie("myCookie", localToken, { path: "/" });
-          } else {
-            setIsLoggedIn(false);
-          }
-        } catch (error) {
-          console.error("Error fetching token:", error);
+      try {
+        if (!cookies.myCookie && isLoggedIn !== false) {
+          setIsLoggedIn(false);
+        } else if (token != null && token !== "" && !cookies.myCookie) {
+          setCookie("myCookie", token, { path: "/" });
+          setIsLoggedIn(true);
+        } else if (
+          (token === "" && cookies.myCookie == null) ||
+          cookies.myCookie == undefined ||
+          cookies.myCookie == ""
+        ) {
+          removeCookie("myCookie");
           setIsLoggedIn(false);
         }
+      } catch (error) {
+        console.error("Error setting cookie:", error);
+        setIsLoggedIn(false);
       }
     };
+
     fetchTokenFromLocalStorage();
-  }, [cookies, setCookie, token]);
+
+    // Clear the cookie when the user logs out
+  }, [cookies, token, setCookie, removeCookie, setIsLoggedIn, isLoggedIn]); // Include removeCookie in the dependency array if it's not a stable function
 
   return (
     <div>
