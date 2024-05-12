@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useFirebase } from "../context/firebase";
+import axios from "axios";
 
 function EditProfile({
   setEditProfile,

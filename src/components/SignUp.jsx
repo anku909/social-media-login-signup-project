@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import defaultProfileImg from "../assets/default-profile.png";
 import { useFirebase } from "../context/firebase";
+import axios from "axios";
 
 function SignUp() {
   const profileInput = useRef(null);
