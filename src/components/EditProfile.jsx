@@ -56,22 +56,25 @@ function EditProfile({
       formData.append("coverImg", coverImg);
       formData.append("profileImg", profileImg);
 
-      const response = await fetch(
+      const response = await axios.patch(
         `https://server-self-tau.vercel.app/api/update/${userEmail}`,
+        formData,
         {
-          method: "PATCH",
-          body: formData,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
 
-      if (!response.ok) {
-        throw new Error("Failed to Submit form");
+      if (response.status !== 200) {
+        throw new Error("Failed to submit form");
       }
-      console.log(formData);
+
+      console.log(response.data);
       setFormSubmitted(true);
       setEditProfile(false);
     } catch (error) {
-      console.error("error", error);
+      console.error("Error:", error);
     }
   };
 

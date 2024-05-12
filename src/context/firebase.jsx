@@ -9,6 +9,7 @@ import {
   signOut,
   signInWithEmailAndPassword,
   updatePassword,
+  deleteUser,
 } from "firebase/auth";
 import { useCookies } from "react-cookie";
 
@@ -139,12 +140,23 @@ export const FirebaseProvider = (props) => {
       const user = firebaseAuth.currentUser;
       if (newPassword != null && newPassword.length >= 6) {
         const response = await updatePassword(user, newPassword);
-        return response;
+        console.log(response);
+        return { response: "success" };
       } else {
         throw new Error("Password must be at least 6 characters long");
       }
     } catch (error) {
       return { error: "Error in updating password", message: error.message };
+    }
+  };
+
+  const firebaseDeleteUser = async () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    try {
+      await deleteUser(user);
+    } catch (error) {
+      console.error("error in deleting User", error.message);
     }
   };
 
@@ -158,6 +170,7 @@ export const FirebaseProvider = (props) => {
         signUpWithGoogle,
         handleSignOut,
         resetPasswordWithoutOtp,
+        firebaseDeleteUser,
       }}
     >
       {props.children}

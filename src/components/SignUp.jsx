@@ -50,21 +50,24 @@ function SignUp() {
       formData.append("coverImg", coverImg);
       formData.append("profileImg", profileImg);
 
-      const response = await fetch(
+      const response = await axios.post(
         "https://server-self-tau.vercel.app/api/signup",
+        formData,
         {
-          method: "POST",
-          body: formData,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
 
-      if (!response.ok) {
+      if (!response.status === 200) {
         throw new Error("Failed to Submit form");
       }
-      console.log(formData);
+
+      console.log(response.data);
       setFormSubmitted(true);
     } catch (error) {
-      console.error("error", error);
+      console.error("Error:", error);
     }
   };
 

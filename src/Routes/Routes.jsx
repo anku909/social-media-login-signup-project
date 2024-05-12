@@ -13,10 +13,6 @@ function AppRoutes() {
   const { user, token } = firebase;
   const [cookies, setCookie, removeCookie] = useCookies(["myCookie"]);
 
-  console.log(isLoggedIn);
-  console.log(cookies);
-  console.log(token);
-
   useEffect(() => {
     if (cookies && cookies.myCookie) {
       setIsLoggedIn(true);

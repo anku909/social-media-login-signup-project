@@ -4,10 +4,13 @@ import axios from "axios";
 import EditProfile from "./EditProfile";
 import settingImg from "../assets/setting.png";
 import { QRCodeSVG } from "qrcode.react";
+import { useCookies } from "react-cookie";
 
 function Body() {
   const firebase = useFirebase();
-  const { user } = firebase;
+  const { user, firebaseDeleteUser } = firebase;
+
+  const [cookies, removeCookie] = useCookies(["myCookie"]);
   const userEmail = user?.email;
   const [fetchedUser, setFetchedUser] = useState("");
   const [editProfile, setEditProfile] = useState(false);
@@ -17,9 +20,7 @@ function Body() {
   const [updatePassError, setUpdatePassError] = useState(null);
   const [showQrCode, setShowQrCode] = useState(false);
   const [showDelteuser, setShowDelteuser] = useState(false);
-  const [deleteUser, setDelteuser] = useState(false);
-
-  console.log(user);
+  const [updateMessage, setUpdateMessage] = useState(false);
 
   const fullName = fetchedUser.name
     ? fetchedUser.name
@@ -30,7 +31,9 @@ function Body() {
     : user?.providerData[0]?.photoURL;
 
   const coverImgUrl = fetchedUser?.coverImg;
-  console.log(fetchedUser);
+
+  console.log(updatePassError);
+
   useEffect(() => {
     if (userEmail) {
       const fetchUserData = async () => {
@@ -60,20 +63,23 @@ function Body() {
   };
 
   const handleUpdatePass = (password) => {
-    firebase
-      .resetPasswordWithoutOtp(password)
-      .then((data) => {
-        // Handle response here
-        setUpdatePassError(data);
-        if (data && data.success) {
-          setShowSetPass(!showSetPass);
-          // Any further logic that depends on the response should be placed here
-        }
-      })
-      .catch((err) => {
-        setUpdatePassError(err.message);
-        console.error("Error in password update", err);
-      });
+    try {
+      if (password != null && password.length >= 6) {
+        firebase.resetPasswordWithoutOtp(password);
+        setTimeout(() => {
+          setShowSetPass(false);
+          setUpdateMessage("Password changed success");
+        }, 2000);
+      } else {
+        let error = "Invalid password length";
+        setUpdatePassError(error);
+        setTimeout(() => {
+          setUpdatePassError("");
+        }, 2500);
+      }
+    } catch (error) {
+      console.error("error in updating Password", error.message);
+    }
   };
 
   const handleShowQrCode = () => {
@@ -87,13 +93,21 @@ function Body() {
   const handleDeleteUer = async (option) => {
     try {
       if (option) {
-        setDelteuser(true);
-        console.log("user deleted");
+        let response = await axios.delete(
+          `http://localhost:8888/api/userdel/${userEmail}`
+        );
+        console.log(response.data);
+        if (response) {
+          await firebaseDeleteUser();
+          setUpdateMessage("User deleted success");
+          handleShowDeleteUerOption();
+          setTimeout(() => {
+            removeCookie("myCookie");
+          }, 2500);
+        }
       } else {
-        setDelteuser(false);
-        console.log("canceled");
+        handleShowDeleteUerOption();
       }
-      handleShowDeleteUerOption();
     } catch (error) {
       console.log("Error in User deletion", error.message);
     }
@@ -172,18 +186,35 @@ function Body() {
                                 />
                               </div>
                             ) : (
-                              <p className="text-center text-md font-semibold lg:text-xl">
-                                Reset your password
-                              </p>
+                              <div>
+                                {updateMessage ? (
+                                  <p className="w-full h-10 bg-[#f2f2f2] rounded-lg text-green-400 font-bold flex items-center justify-center">
+                                    {updateMessage}
+                                  </p>
+                                ) : (
+                                  <p className="text-center text-md font-semibold lg:text-xl">
+                                    Reset your password
+                                  </p>
+                                )}
+                              </div>
                             )}
                           </div>
                           {showSetPass ? (
-                            <button
-                              onClick={() => handleUpdatePass(password)}
-                              className="w-full h-6 bg-blue-500 rounded-[4px] text-white text-sm font-semibold sm:h-8 lg:h-12 lg:text-base"
-                            >
-                              Update Password
-                            </button>
+                            <div>
+                              <button
+                                onClick={() => handleUpdatePass(password)}
+                                className="w-full h-6 bg-blue-500 rounded-[4px] text-white text-sm font-semibold sm:h-8 lg:h-12 lg:text-base"
+                              >
+                                Update Password
+                              </button>
+                              {updatePassError ? (
+                                <p className="text-xs text-center text-red-500 mt-2">
+                                  {updatePassError}
+                                </p>
+                              ) : (
+                                ""
+                              )}
+                            </div>
                           ) : (
                             <div>
                               <button
@@ -192,11 +223,6 @@ function Body() {
                               >
                                 Reset Password
                               </button>
-                              {updatePassError ? (
-                                <span>{updatePassError}</span>
-                              ) : (
-                                ""
-                              )}
                             </div>
                           )}
                           <button
@@ -215,7 +241,7 @@ function Body() {
                               </button>
                               <button
                                 onClick={() => handleDeleteUer(false)}
-                                className="w-30 h-6 px-2 border-[#b6b3b3] border-[1px] rounded-full text-white text-xs font-semibold sm:w-32 sm:h-8 sm:text-sm lg:w-32 lg:h-10 lg:text-base"
+                                className="w-30 h-6 px-2 border-[#b6b3b3] border-[1px] rounded-full text-black text-xs font-semibold sm:w-32 sm:h-8 sm:text-sm lg:w-32 lg:h-10 lg:text-base"
                               >
                                 Cancel
                               </button>
