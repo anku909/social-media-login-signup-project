@@ -58,7 +58,7 @@ function EditProfile({
       formData.append("profileImg", profileImg);
 
       const response = await axios.patch(
-        `http://server-bice-xi.vercel.app/api/update/${userEmail}`,
+        `https://server-bice-xi.vercel.app/api/update/${userEmail}`,
         formData,
         {
           headers: {
