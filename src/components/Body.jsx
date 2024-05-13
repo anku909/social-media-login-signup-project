@@ -39,7 +39,7 @@ function Body() {
       const fetchUserData = async () => {
         try {
           let responseData = await axios.get(
-            `https://server-self-tau.vercel.app/api/user/${userEmail}`
+            `https://server-bice-xi.vercel.app/api/user/${userEmail}`
           );
           const data = responseData;
           setFetchedUser(data.data);
@@ -94,7 +94,7 @@ function Body() {
     try {
       if (option) {
         let response = await axios.delete(
-          `https://server-self-tau.vercel.app/api/userdel/${userEmail}`
+          `https://server-bice-xi.vercel.app/api/userdel/${userEmail}`
         );
         console.log(response.data);
         if (response) {

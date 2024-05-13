@@ -85,7 +85,7 @@ export const FirebaseProvider = (props) => {
       const exisitingUser = async () => {
         try {
           const response = await fetch(
-            `https://server-self-tau.vercel.app/api/user/${email}`
+            `https://server-bice-xi.vercel.app/api/user/${email}`
           );
           if (response.ok) {
             const data = await response.json();
@@ -109,7 +109,7 @@ export const FirebaseProvider = (props) => {
             profileImg: photoURL,
           });
           const response = await fetch(
-            "https://server-self-tau.vercel.app/api/signup",
+            "https://server-bice-xi.vercel.app/api/signup",
             {
               method: "POST",
               headers: {

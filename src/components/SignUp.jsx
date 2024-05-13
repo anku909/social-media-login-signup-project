@@ -52,7 +52,7 @@ function SignUp() {
       formData.append("profileImg", profileImg);
 
       const response = await axios.post(
-        "https://server-self-tau.vercel.app/api/signup",
+        "https://server-bice-xi.vercel.app/api/signup",
         formData,
         {
           headers: {
