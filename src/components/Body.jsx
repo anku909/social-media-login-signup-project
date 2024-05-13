@@ -94,7 +94,7 @@ function Body() {
     try {
       if (option) {
         let response = await axios.delete(
-          `http://localhost:8888/api/userdel/${userEmail}`
+          `https://server-self-tau.vercel.app/api/userdel/${userEmail}`
         );
         console.log(response.data);
         if (response) {
