@@ -9,16 +9,12 @@ function Profile() {
   const { id } = params;
   const [fetchedUser, setFetchedUser] = useState("");
 
-  console.log(`https://server-self-tau.vercel.app/api/profile/${id}`);
-
-  console.log(fetchedUser);
-
   useEffect(() => {
     if (id) {
       const fetchUserData = async () => {
         try {
           let responseData = await axios.get(
-            `https://server-self-tau.vercel.app/api/profile/${id}`
+            `https://server-bice-xi.vercel.app/api/profile/${id}`
           );
           const data = responseData;
           setFetchedUser(data.data);
