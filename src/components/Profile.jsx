@@ -26,6 +26,12 @@ function Profile() {
     }
   }, [id]);
 
+  let profileImg =
+    fetchedUser.profileImgData && fetchedUser?.profileImgData[0]?.profileImg;
+
+  let coverImg =
+    fetchedUser.coverImgData && fetchedUser?.coverImgData[0]?.coverImg;
+
   return (
     <>
       <Header />
@@ -36,14 +42,11 @@ function Profile() {
               <div className="coverimgContainer w-full h-36 relative rounded-lg overflow-hidden lg:h-56">
                 <img
                   className="w-full h-full object-cover opacity-95"
-                  src={fetchedUser?.coverImg}
+                  src={coverImg}
                 />
               </div>
               <div className="profileImg w-16 h-16 rounded-full overflow-hidden absolute -bottom-10 left-1/2 -translate-x-1/2 drop-shadow-2xl sm:w-20 sm:h-20 lg:w-28 lg:h-28">
-                <img
-                  className="w-full h-full object-cover"
-                  src={fetchedUser?.profileImg}
-                />
+                <img className="w-full h-full object-cover" src={profileImg} />
               </div>
             </div>
             <div className="profileCarddetails w-full border-[1px] border-[#b5b2b2] rounded-md px-5 py-10 mt-4 flex flex-col items-center justify-center gap-2">
