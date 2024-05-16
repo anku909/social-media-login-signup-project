@@ -32,8 +32,6 @@ function Body() {
 
   const coverImgUrl = fetchedUser?.coverImg;
 
-  console.log(updatePassError);
-
   useEffect(() => {
     if (userEmail) {
       const fetchUserData = async () => {
@@ -50,6 +48,8 @@ function Body() {
       fetchUserData();
     }
   }, [userEmail]);
+
+  console.log(fetchedUser.coverImgData[0].coverImg);
 
   const handleEditProfile = () => {
     setEditProfile(true);
@@ -68,7 +68,7 @@ function Body() {
         firebase.resetPasswordWithoutOtp(password);
         setTimeout(() => {
           setShowSetPass(false);
-          setUpdateMessage("Password changed success");
+          setUpdateMessage("Password updated");
         }, 2000);
       } else {
         let error = "Invalid password length";
