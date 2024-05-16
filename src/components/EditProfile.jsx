@@ -23,8 +23,6 @@ function EditProfile({
 
   const firebase = useFirebase();
 
-  console.log(firebase.user.accessToken);
-
   const handleProfileImageClick = () => {
     profileInput.current.click();
   };
@@ -71,7 +69,6 @@ function EditProfile({
         throw new Error("Failed to submit form");
       }
 
-      console.log(response.data);
       setFormSubmitted(true);
       setEditProfile(false);
     } catch (error) {

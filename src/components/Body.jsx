@@ -26,11 +26,12 @@ function Body() {
     ? fetchedUser.name
     : user?.providerData[0]?.displayName;
 
-  const profileImgUrl = fetchedUser.profileImg
-    ? fetchedUser.profileImg
-    : user?.providerData[0]?.photoURL;
+  const profileImgUrl =
+    fetchedUser && fetchedUser.profileImgData
+      ? fetchedUser?.profileImgData[0]?.profileImg
+      : user?.providerData[0]?.photoURL;
 
-  const coverImgUrl = fetchedUser?.coverImg;
+  const coverImgUrl = fetchedUser && fetchedUser?.coverImgData[0]?.coverImg;
 
   useEffect(() => {
     if (userEmail) {
@@ -48,8 +49,7 @@ function Body() {
       fetchUserData();
     }
   }, [userEmail]);
-
-  console.log(fetchedUser.coverImgData[0].coverImg);
+  console.log(fetchedUser);
 
   const handleEditProfile = () => {
     setEditProfile(true);
@@ -96,7 +96,6 @@ function Body() {
         let response = await axios.delete(
           `https://server-bice-xi.vercel.app/api/userdel/${userEmail}`
         );
-        console.log(response.data);
         if (response) {
           await firebaseDeleteUser();
           setUpdateMessage("User deleted success");
