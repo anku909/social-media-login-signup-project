@@ -33,23 +33,49 @@ function Body() {
 
   const coverImgUrl = fetchedUser && fetchedUser?.coverImgData[0]?.coverImg;
 
+  console.log(profileImgUrl);
+  console.log(coverImgUrl);
+
+  const [profileImgLoaded, setProfileImgLoaded] = useState(false);
+  const [coverImgLoaded, setCoverImgLoaded] = useState(false);
+
   useEffect(() => {
-    if (userEmail) {
-      const fetchUserData = async () => {
-        try {
+    // Reset the loading state when the URLs change
+    setProfileImgLoaded(false);
+    setCoverImgLoaded(false);
+  }, [profileImgUrl, coverImgUrl]);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        if (user) {
           let responseData = await axios.get(
-            `https://server-bice-xi.vercel.app/api/user/${userEmail}`
+            `https://server-bice-xi.vercel.app/api/user/${user.email}`
           );
-          const data = responseData;
-          setFetchedUser(data.data);
-        } catch (error) {
-          console.error("Not able to fetch user", error);
+          const data = responseData.data; // Access data property
+          setFetchedUser(data);
         }
-      };
-      fetchUserData();
+      } catch (error) {
+        console.error("Not able to fetch user", error);
+      }
+    };
+
+    fetchUserData();
+  }, [user]);
+
+  const handleProfileUpdated = async () => {
+    try {
+      const responseData = await axios.get(
+        `https://server-bice-xi.vercel.app/api/user/${user.email}`
+      );
+
+      const updatedData = responseData.data; // Access data property
+
+      setFetchedUser(updatedData);
+    } catch (error) {
+      console.error("Not able to fetch user", error);
     }
-  }, [userEmail]);
-  console.log(fetchedUser);
+  };
 
   const handleEditProfile = () => {
     setEditProfile(true);
@@ -123,6 +149,7 @@ function Body() {
           profileImgUrl={profileImgUrl}
           coverImgUrl={coverImgUrl}
           userEmail={userEmail}
+          onProfileUpdate={handleProfileUpdated}
         />
       ) : (
         <div className="w-full min-h-screen bg-slate-50 px-6 sm:px-24 lg:px-[20vw]">
@@ -147,25 +174,39 @@ function Body() {
                 </>
               ) : (
                 <>
-                  <div className="profileCardImg w-full relative rounded-md ">
-                    <div className="coverimgContainer  w-full h-32 relative rounded-lg overflow-hidden sm:h-40 lg:h-56">
-                      <img
-                        className="w-full h-full object-cover opacity-95"
-                        src={coverImgUrl}
-                      />
+                  <div className="profileCardImg w-full relative rounded-md">
+                    <div className="coverimgContainer w-full h-full relative rounded-lg overflow-hidden sm:h-40 lg:h-56 bg-gradient-to-t from-slate-500 to-slate-300">
+                      {coverImgUrl && (
+                        <img
+                          className={`w-full h-full object-cover ${
+                            coverImgLoaded ? "" : "hidden"
+                          }`}
+                          src={coverImgUrl}
+                          onLoad={() => setCoverImgLoaded(true)}
+                          onError={() => setCoverImgLoaded(false)}
+                        />
+                      )}
+                    </div>
+
+                    <div className="profileImg w-16 h-16 lg:w-28 lg:h-28 rounded-full absolute -bottom-10 left-1/2 transform -translate-x-1/2 drop-shadow-2xl border-[#e9e7e7] border-[2px] bg-gradient-to-t from-slate-500 to-slate-300 overflow-hidden">
+                      {profileImgUrl && (
+                        <img
+                          className={`w-full h-full object-cover opacity-95 ${
+                            profileImgLoaded ? "" : "hidden"
+                          }`}
+                          src={profileImgUrl}
+                          onLoad={() => setProfileImgLoaded(true)}
+                          onError={() => setProfileImgLoaded(false)}
+                        />
+                      )}
                     </div>
                     <div
                       onClick={handleShowSetting}
                       className="settting-icon w-10 h-10 -top-6 -right-5 rounded-full overflow-hidden flex items-center justify-center cursor-pointer z-50 absolute sm:w-14 sm:h-14 sm:-top-7 sm:-right-7 lg:w-16 lg:h-16 lg:-top-9 lg:-right-8 "
                     >
-                      <img src={settingImg} alt="" />
+                      <img src={settingImg} />
                     </div>
-                    <div className="profileImg w-16 h-16 lg:w-28 lg:h-28 rounded-full overflow-hidden absolute -bottom-10 left-1/2 -translate-x-1/2 drop-shadow-2xl">
-                      <img
-                        className="w-full h-full object-cover"
-                        src={profileImgUrl}
-                      />
-                    </div>
+
                     {showSetting ? (
                       <div className="setting w-full h-[38vh] rounded-lg bg-zinc-200 border-[1px] border-[#969595] flex flex-col items-center justify-center absolute top-0 z-2 py-4 px-5 sm:h-80 md:h-80 lg:h-[40vh]">
                         <h2 className="text-center w-full text-md  font-semibold bg-slate-100 rounded-lg mt-4 sm:text-2xl lg:h-12">

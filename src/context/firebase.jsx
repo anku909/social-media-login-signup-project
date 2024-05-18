@@ -89,6 +89,7 @@ export const FirebaseProvider = (props) => {
           );
           if (response.ok) {
             const data = await response.json();
+            console.log(data);
             return data.exists; // Assuming the response contains a property indicating if the user exists
           } else {
             throw new Error("Failed to fetch user data");

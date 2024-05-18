@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useFirebase } from "../context/firebase";
 import axios from "axios";
 
 function EditProfile({
@@ -8,6 +7,7 @@ function EditProfile({
   coverImgUrl,
   profileImgUrl,
   userEmail,
+  onProfileUpdate,
 }) {
   const profileInput = useRef(null);
   const coverInput = useRef(null);
@@ -20,8 +20,6 @@ function EditProfile({
   const [gender, setGender] = useState("");
   const [location, setLocation] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
-
-  const firebase = useFirebase();
 
   const handleProfileImageClick = () => {
     profileInput.current.click();
@@ -64,6 +62,8 @@ function EditProfile({
           },
         }
       );
+
+      onProfileUpdate();
 
       if (response.status !== 200) {
         throw new Error("Failed to submit form");
@@ -108,7 +108,7 @@ function EditProfile({
               className="w-full h-full flex flex-col items-center justify-center gap-2"
             >
               <div
-                className="coverImg w-full h-32 flex justify-center mb-8 overflow-hidden border-[#dbd9d9] border-[1px] rounded-md"
+                className="coverImg w-full h-32 flex justify-center mb-8 overflow-hidden bg-gradient-to-t from-slate-500 to-slate-300 border-[#dbd9d9] border-[1px] rounded-md"
                 onClick={handleCoverImageClick}
               >
                 {coverImg ? (
@@ -135,7 +135,7 @@ function EditProfile({
                 className="hidden "
               />
               <div
-                className="profile w-20 h-20 rounded-full border-zinc-500 border-2 overflow-hidden absolute top-20"
+                className="profile w-20 h-20 rounded-full border-[#c9c7c7] border-2 overflow-hidden absolute top-20"
                 onClick={handleProfileImageClick}
               >
                 {profileImg ? (

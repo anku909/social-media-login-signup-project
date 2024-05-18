@@ -110,7 +110,7 @@ function SignUp() {
                   className="w-full h-full flex flex-col items-center justify-center gap-2"
                 >
                   <div
-                    className="coverImg w-full h-32 bg-orange-200 flex justify-center mb-8 overflow-hidden border-[#dbd9d9] border-[1px] rounded-md cursor-pointer"
+                    className="coverImg w-full h-32 flex justify-center mb-8 overflow-hidden border-[#dbd9d9] border-[1px] rounded-md cursor-pointer"
                     onClick={handleCoverImageClick}
                   >
                     {coverImg ? (
