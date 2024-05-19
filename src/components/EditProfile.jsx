@@ -115,13 +115,11 @@ function EditProfile({
                   <img
                     className="w-full object-cover rounded-md"
                     src={URL.createObjectURL(coverImg)}
-                    alt="coverImg"
                   />
                 ) : (
                   <img
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover bg-slate-500"
                     src={coverImgUrl}
-                    alt="profile"
                   />
                 )}
               </div>
@@ -142,13 +140,11 @@ function EditProfile({
                   <img
                     className="w-full  object-cover"
                     src={URL.createObjectURL(profileImg)}
-                    alt="profile"
                   />
                 ) : (
                   <img
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover  bg-slate-500"
                     src={profileImgUrl}
-                    alt="profile"
                   />
                 )}
               </div>

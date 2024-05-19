@@ -32,6 +32,11 @@ export const FirebaseProvider = (props) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [cookie, removeCookie] = useCookies(["myCookie"]);
+  const [error, setError] = useState("");
+
+  setTimeout(() => {
+    setError("");
+  }, 3000);
 
   useEffect(() => {
     const auth = getAuth();
@@ -55,23 +60,24 @@ export const FirebaseProvider = (props) => {
       setToken(null);
       removeCookie("myCookie"); // Remove the cookie with the correct path
     } catch (error) {
-      console.error("Error signing out:", error);
+      setError(error.message);
     }
   };
 
-  const signupUserWithEmailAndPassword = (email, password) => {
+  const signupUserWithEmailAndPassword = async (email, password) => {
     try {
-      return createUserWithEmailAndPassword(firebaseAuth, email, password);
+      setError("");
+      await createUserWithEmailAndPassword(firebaseAuth, email, password);
     } catch (error) {
-      console.error("Authentication error:", error);
+      setError(error.message);
     }
   };
 
-  const signinUserWithEmailAndPassword = (email, password) => {
+  const signinUserWithEmailAndPassword = async (email, password) => {
     try {
-      return signInWithEmailAndPassword(firebaseAuth, email, password);
+      await signInWithEmailAndPassword(firebaseAuth, email, password);
     } catch (error) {
-      console.error("Authentication error:", error);
+      setError(error.message);
     }
   };
 
@@ -89,14 +95,12 @@ export const FirebaseProvider = (props) => {
           );
           if (response.ok) {
             const data = await response.json();
-            console.log(data);
             return data.exists; // Assuming the response contains a property indicating if the user exists
           } else {
             throw new Error("Failed to fetch user data");
           }
         } catch (error) {
-          console.error("Error checking existing user:", error);
-          return false; // Return false if there's an error
+          setError(error.message);
         }
       };
 
@@ -147,7 +151,7 @@ export const FirebaseProvider = (props) => {
         throw new Error("Password must be at least 6 characters long");
       }
     } catch (error) {
-      return { error: "Error in updating password", message: error.message };
+      setError(error.message);
     }
   };
 
@@ -157,7 +161,7 @@ export const FirebaseProvider = (props) => {
     try {
       await deleteUser(user);
     } catch (error) {
-      console.error("error in deleting User", error.message);
+      setError(error.message);
     }
   };
 
@@ -166,6 +170,7 @@ export const FirebaseProvider = (props) => {
       value={{
         user,
         token,
+        error,
         signupUserWithEmailAndPassword,
         signinUserWithEmailAndPassword,
         signUpWithGoogle,

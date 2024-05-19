@@ -22,6 +22,8 @@ function Body() {
   const [showDelteuser, setShowDelteuser] = useState(false);
   const [updateMessage, setUpdateMessage] = useState(false);
 
+  console.log(fetchedUser);
+
   const fullName = fetchedUser.name
     ? fetchedUser.name
     : user?.providerData[0]?.displayName;
@@ -33,15 +35,14 @@ function Body() {
 
   const coverImgUrl = fetchedUser && fetchedUser?.coverImgData[0]?.coverImg;
 
-  console.log(profileImgUrl);
-  console.log(coverImgUrl);
-
   const [profileImgLoaded, setProfileImgLoaded] = useState(false);
   const [coverImgLoaded, setCoverImgLoaded] = useState(false);
 
+  console.log(profileImgLoaded);
+
   useEffect(() => {
     // Reset the loading state when the URLs change
-    setProfileImgLoaded(false);
+    setProfileImgLoaded(true);
     setCoverImgLoaded(false);
   }, [profileImgUrl, coverImgUrl]);
 

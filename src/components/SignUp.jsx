@@ -19,6 +19,10 @@ function SignUp() {
 
   const firebase = useFirebase();
 
+  let error = firebase.error;
+  let splitedErrorMsg = error?.split("/")[1]?.split(")")[0];
+  console.log(splitedErrorMsg);
+
   const handleProfileImageClick = () => {
     profileInput.current.click();
   };
@@ -42,31 +46,31 @@ function SignUp() {
     e.preventDefault();
 
     try {
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("phoneNo", phoneNo);
-      formData.append("email", email);
-      formData.append("userName", username);
-      formData.append("password", password);
-      formData.append("coverImg", coverImg);
-      formData.append("profileImg", profileImg);
+      if (!error) {
+        const formData = new FormData();
+        formData.append("name", name);
+        formData.append("phoneNo", phoneNo);
+        formData.append("email", email);
+        formData.append("userName", username);
+        formData.append("password", password);
+        formData.append("coverImg", coverImg);
+        formData.append("profileImg", profileImg);
 
-      const response = await axios.post(
-        "https://server-bice-xi.vercel.app/api/signup",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+        const response = await axios.post(
+          "https://server-bice-xi.vercel.app/api/signup",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        if (!response.status === 200) {
+          throw new Error("Failed to Submit form");
         }
-      );
 
-      if (!response.status === 200) {
-        throw new Error("Failed to Submit form");
+        setFormSubmitted(true);
       }
-
-      console.log(response.data);
-      setFormSubmitted(true);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -200,6 +204,7 @@ function SignUp() {
                     value={email}
                     placeholder="Email"
                   />
+
                   <div className="password-input w-full h-10 border-[1px]  border-[#b4b2b2] bg-zinc-100 rounded-md pl-3 flex items-center">
                     <input
                       onChange={(e) => setPassword(e.target.value)}
@@ -220,6 +225,13 @@ function SignUp() {
                       )}
                     </div>
                   </div>
+                  {error ? (
+                    <p className="text-red-500 text-sm font-semibold">
+                      {splitedErrorMsg}
+                    </p>
+                  ) : (
+                    ""
+                  )}
 
                   <button
                     onClick={() =>
