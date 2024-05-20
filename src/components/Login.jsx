@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useFirebase } from "../context/firebase";
+import mainImg from "../assets/titled-logo.jpg";
 
 function Login() {
   const firebase = useFirebase();
@@ -31,8 +32,11 @@ function Login() {
   return (
     <>
       <div className="login w-full h-screen flex items-center justify-center  bg-slate-200 sm:px-[10vw]  md:px-[10vw] lg:px-[10vw] xl:px-[20vw] 2xl:px-[25vw]">
-        <div className="login-inner-section w-full h-screen flex items-center justify-center sm:justify-end md:justify-end lg:justify-end xl:justify-end lg:pt-20 lg:flex  ">
-          <div className="logo-or-details-section lg:w-[25vw] lg:h-5/6"></div>
+        <div className="login-inner-section w-full h-screen flex items-center justify-center gap-20  sm:justify-end md:justify-end lg:justify-end xl:justify-end lg:pt-20 lg:flex  ">
+          <div className="logo-or-details-section w-40 h-60 flex  items-center rounded-md lg:w-[25vw] lg:h-[51.5vh]">
+            <img className="w-full h-full rounded-md" src={mainImg} />
+          </div>
+
           <div className="login-function-section w-[350px] sm:w-[400px] md:w-[400px] lg:w-[420px]   ">
             <div className="login-box w-full  border-[1px] border-[#a8a8a8]">
               <div className="heading w-full py-4 lg:py-8">
