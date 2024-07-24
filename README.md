@@ -39,7 +39,7 @@ Start devlopment server
 
 ##### Test user : username: testuser , email: testuser@example.com , password: testuser
 
-###### If using Local devlopment server change `constants.js` api's to `http://localhost:8888`
+##### If using Local devlopment server change `constants.js` api's to `http://localhost:8888`
 
 ### Local Server : https://github.com/anku909/server.git 
 
