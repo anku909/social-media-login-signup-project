@@ -7,6 +7,8 @@
 
 ![Screenshot_2024-07-24_11_40_32](https://github.com/user-attachments/assets/296d72b2-2971-491f-a33b-4cdef6854b5c)
 
+### Live : https://social-media-login-signup-project.vercel.app
+
 ## Run Locally
 
 Clone the project
