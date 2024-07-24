@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import axios from "axios";
+import { userProfileApiUrl } from "../Constants";
 
 function Profile() {
   const params = useParams();
@@ -14,7 +15,7 @@ function Profile() {
       const fetchUserData = async () => {
         try {
           let responseData = await axios.get(
-            `https://server-bice-xi.vercel.app/api/profile/${id}`
+            `${userProfileApiUrl}${id}`
           );
           const data = responseData;
           setFetchedUser(data.data);

@@ -7,13 +7,11 @@ import { FirebaseProvider } from "./context/firebase.jsx";
 import { CookiesProvider } from "react-cookie";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <CookiesProvider>
-        <FirebaseProvider>
-          <App />
-        </FirebaseProvider>
-      </CookiesProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+  <BrowserRouter>
+    <CookiesProvider>
+      <FirebaseProvider>
+        <App />
+      </FirebaseProvider>
+    </CookiesProvider>
+  </BrowserRouter>
 );

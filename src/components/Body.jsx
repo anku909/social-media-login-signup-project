@@ -5,6 +5,7 @@ import EditProfile from "./EditProfile";
 import settingImg from "../assets/setting.png";
 import { QRCodeSVG } from "qrcode.react";
 import { useCookies } from "react-cookie";
+import { profileQRCodeUrl, userApiUrl, userDelApiUrl } from "../Constants";
 
 function Body() {
   const firebase = useFirebase();
@@ -22,7 +23,6 @@ function Body() {
   const [showDelteuser, setShowDelteuser] = useState(false);
   const [updateMessage, setUpdateMessage] = useState(false);
 
-  console.log(fetchedUser);
 
   const fullName = fetchedUser.name
     ? fetchedUser.name
@@ -51,7 +51,7 @@ function Body() {
       try {
         if (user) {
           let responseData = await axios.get(
-            `https://server-bice-xi.vercel.app/api/user/${user.email}`
+            `${userApiUrl}${user.email}`
           );
           const data = responseData.data; // Access data property
           setFetchedUser(data);
@@ -67,7 +67,7 @@ function Body() {
   const handleProfileUpdated = async () => {
     try {
       const responseData = await axios.get(
-        `https://server-bice-xi.vercel.app/api/user/${user.email}`
+        `${userApiUrl}${user.email}`
       );
 
       const updatedData = responseData.data; // Access data property
@@ -78,7 +78,7 @@ function Body() {
     }
   };
 
-  const handleEditProfile = () => {
+  const handleEditProfile = () => { 
     setEditProfile(true);
   };
 
@@ -121,7 +121,7 @@ function Body() {
     try {
       if (option) {
         let response = await axios.delete(
-          `https://server-bice-xi.vercel.app/api/userdel/${userEmail}`
+          `${userDelApiUrl}${userEmail}`
         );
         if (response) {
           await firebaseDeleteUser();
@@ -138,8 +138,6 @@ function Body() {
       console.log("Error in User deletion", error.message);
     }
   };
-
-  const profileQrCodeUrl = `https://social-media-login-signup-project.vercel.app/profile/${fetchedUser?._id}`;
 
   return (
     <>
@@ -160,7 +158,7 @@ function Body() {
                 <>
                   <QRCodeSVG
                     className="w-[80%] h-[80%] "
-                    value={profileQrCodeUrl}
+                    value={`${profileQRCodeUrl}${fetchedUser?._id}`}
                   />
                   <h1 className="text-base font-semibold font-mono sm:text-2xl lg:text-2xl">
                     {" "}

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { userUpdateApiUrl } from "../Constants";
 
 function EditProfile({
   setEditProfile,
@@ -54,7 +55,7 @@ function EditProfile({
       formData.append("profileImg", profileImg);
 
       const response = await axios.patch(
-        `https://server-bice-xi.vercel.app/api/update/${userEmail}`,
+        `${userUpdateApiUrl}${userEmail}`,
         formData,
         {
           headers: {

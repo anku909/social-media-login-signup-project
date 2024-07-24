@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import defaultProfileImg from "../assets/default-profile.png";
 import { useFirebase } from "../context/firebase";
 import axios from "axios";
+import { userSignupUrl } from "../Constants";
 
 function SignUp() {
   const profileInput = useRef(null);
@@ -56,8 +57,7 @@ function SignUp() {
         formData.append("coverImg", coverImg);
         formData.append("profileImg", profileImg);
 
-        const response = await axios.post(
-          "https://server-bice-xi.vercel.app/api/signup",
+        const response = await axios.post(userSignupUrl,
           formData,
           {
             headers: {
